@@ -4,13 +4,12 @@ namespace Heladeria_Dulce_Sabor
 {
     class Program
     {
-        static void Main(string[] args)
+        void Main(string[] args)
         {
             menu();
         }
 
-         static private void menu()
-        {
+        public void menu(){
             Console.BackgroundColor = ConsoleColor.Yellow;
             Console.ForegroundColor = ConsoleColor.Black;
             int Op=0;
@@ -30,7 +29,7 @@ namespace Heladeria_Dulce_Sabor
                     registrar();
                 } else if(Op == 2){
                     Console.Clear();
-                    Console.WriteLine("AQUI VA LA OPCION CONSULTAR");
+                    //consultar();
                 } else if(Op == 3){
                     Console.Clear();
                     Console.WriteLine("AQUI VA LA OPCION DE ACTUALIZAR");
@@ -70,7 +69,7 @@ namespace Heladeria_Dulce_Sabor
             } else {
                     Console.WriteLine("VALOR INCORRECTO");
                 }
-            } while (tipoHelado != 2);
+            } while (tipoHelado!=1 && tipoHelado!=2);
             do{
             Console.WriteLine("DIGITE SUS TOPPINGS");
             Console.Write("1.MANI      2.CHISPAS DE CHOCOLATE    3.CHISPAS DE COLORES :");
@@ -85,10 +84,20 @@ namespace Heladeria_Dulce_Sabor
                 }else{
                     Console.WriteLine("VALOR INCORRECTO");
                 }
-            } while (toppings != 3);
+            } while (toppings!=1 && toppings!=2 && toppings != 3);
             Console.Write("DIGITE EL PRECIO: ");
             precio = double.Parse(Console.ReadLine());
+            Console.WriteLine("PRECIONE ENTER PARA CONTINUAR");
             Console.ReadKey();
+            Console.Clear();
         }
+
+        /*public void consultar(){
+            Console.WriteLine($"Cedula: {cc}");
+            Console.WriteLine($"Nombre: {nombre}");
+            Console.WriteLine($"Tipo de helado: {tipoHelado}");
+            Console.WriteLine($"Toppings: {toppings}");
+            Console.WriteLine($"Precio: {precio}");
+        }*/
     }
 }
