@@ -9,7 +9,7 @@ namespace Heladeria_Dulce_Sabor
             menu();
         }
 
-        static void menu()
+         static private void menu()
         {
             Console.BackgroundColor = ConsoleColor.Yellow;
             Console.ForegroundColor = ConsoleColor.Black;
@@ -27,7 +27,7 @@ namespace Heladeria_Dulce_Sabor
 
                 if (Op == 1){
                     Console.Clear();
-                    Console.WriteLine("AQUI VA LA OPCION DE REGISTRAR");
+                    registrar();
                 } else if(Op == 2){
                     Console.Clear();
                     Console.WriteLine("AQUI VA LA OPCION CONSULTAR");
@@ -44,6 +44,51 @@ namespace Heladeria_Dulce_Sabor
                
             } while (Op != 5 );
 
+        }
+
+        static private void registrar() {
+            //Console.BackgroundColor = ConsoleColor.Green;
+            Console.ForegroundColor = ConsoleColor.Black;
+            String cc;
+            String nombre;
+            int tipoHelado, toppings;
+            double precio;
+
+            Console.Write("DIGITE SU CEDULA: ");
+            cc = Console.ReadLine();
+            Console.Write("DIGITE SU NOMBRE: ");
+            nombre = Console.ReadLine();
+            do{
+                Console.WriteLine("DIGITE EL TIPO DE HELADO");
+            Console.Write("1. CONO      2.VASO :");
+            tipoHelado = int.Parse(Console.ReadLine());
+            
+                if (tipoHelado == 1) {
+                    Console.WriteLine("CONO");
+                } else if (tipoHelado == 2) {
+                    Console.WriteLine("VASO");
+            } else {
+                    Console.WriteLine("VALOR INCORRECTO");
+                }
+            } while (tipoHelado != 2);
+            do{
+            Console.WriteLine("DIGITE SUS TOPPINGS");
+            Console.Write("1.MANI      2.CHISPAS DE CHOCOLATE    3.CHISPAS DE COLORES :");
+            toppings = int.Parse(Console.ReadLine());
+            
+                if (toppings == 1){
+                    Console.WriteLine("MANI");
+                }else if (toppings == 2){
+                    Console.WriteLine("CHISPAS DE CHOCOLATE");
+                }else if(toppings == 3){
+                    Console.WriteLine("CHISPAS DE COLORES");
+                }else{
+                    Console.WriteLine("VALOR INCORRECTO");
+                }
+            } while (toppings != 3);
+            Console.Write("DIGITE EL PRECIO: ");
+            precio = double.Parse(Console.ReadLine());
+            Console.ReadKey();
         }
     }
 }
