@@ -31,8 +31,8 @@ namespace Heladeria_Dulce_Sabor
 
         static public void Menu()
         {
-            //Console.BackgroundColor = ConsoleColor.Yellow;
-            //Console.ForegroundColor = ConsoleColor.Black;
+            Console.BackgroundColor = ConsoleColor.Yellow;
+            Console.ForegroundColor = ConsoleColor.Black;
             int Op = 0;
             do
             {
@@ -59,17 +59,17 @@ namespace Heladeria_Dulce_Sabor
                 else if (Op == 2)
                 {
                     Console.Clear();
-                    Console.WriteLine("AQUI VA LA OPCION DE CONSULTAR");
+                    Consulta();
                 }
                 else if (Op == 3)
                 {
                     Console.Clear();
-                    Console.WriteLine("AQUI VA LA OPCION DE ACTUALIZAR");
+                    Actualizar();
                 }
                 else if (Op == 4)
                 {
                     Console.Clear();
-                    Console.WriteLine("AQUI VA LA OPCION DE ELIMINAR");
+                    Eliminar();
                 }
                 else
                 {
@@ -83,13 +83,14 @@ namespace Heladeria_Dulce_Sabor
 
         static private void Registrar()
         {
-            //Console.BackgroundColor = ConsoleColor.Green;
-            //Console.ForegroundColor = ConsoleColor.Black;
+            Console.BackgroundColor = ConsoleColor.Yellow;
+            Console.ForegroundColor = ConsoleColor.Black;
             String cc;
             String nombre;
             int tipoHelado, toppings;
             double precio;
             double totalHelado = 0;
+            String nombreT="", nombreH="";
             Titulo();
 
             Console.SetCursorPosition(15, 8); Console.Write("DIGITE SU CEDULA: ");
@@ -109,11 +110,13 @@ namespace Heladeria_Dulce_Sabor
                 if (tipoHelado == 1)
                 {
                     Console.WriteLine("CONO");
+                    nombreH = "CONO";
                     totalHelado = 2500;
                 }
                 else if (tipoHelado == 2)
                 {
                     Console.WriteLine("VASO");
+                    nombreH = "VASO";
                     totalHelado = 3000;
                 }
                 else
@@ -135,16 +138,19 @@ namespace Heladeria_Dulce_Sabor
                 if (toppings == 1)
                 {
                     Console.WriteLine("MANI");
+                    nombreT = "MANI";
                     totalHelado = totalHelado + 2000;
                 }
                 else if (toppings == 2)
                 {
                     Console.WriteLine("CHISPAS DE CHOCOLATE");
+                    nombreT = "CHISPAS DE CHOCOLATE";
                     totalHelado = totalHelado + 3000;
                 }
                 else if (toppings == 3)
                 {
                     Console.WriteLine("CHISPAS DE COLORES");
+                    nombreT = "CHISPAS DE COLORES";
                     totalHelado = totalHelado + 1500;
                 }
                 else
@@ -157,9 +163,32 @@ namespace Heladeria_Dulce_Sabor
             precio = totalHelado;
             Console.WriteLine($"EL PRECIO TOTAL DE SU HELADO ES DE: {precio}");
             Console.WriteLine("------------------------------------------");
+            Console.WriteLine("-----------FACTURA-----------");
+            Console.WriteLine($"Cedula: {cc}");
+            Console.WriteLine($"Nombre: {nombre}");
+            Console.WriteLine($"Tipo de helado: {nombreH}");
+            Console.WriteLine($"Toppings: {nombreT}");
+            Console.WriteLine($"Precio: {precio}\n");
             Console.WriteLine("PRECIONE ENTER PARA CONTINUAR");
             Console.ReadKey();
             Console.Clear();
         }
+
+        static private void Consulta(){
+            Titulo();
+            Console.WriteLine("VENTAS TOTALES");
+        }
+
+        static private void Actualizar(){
+            Titulo();
+            Console.WriteLine("ACTUALIZAR FACTURA");
+        }
+
+        static private void Eliminar()
+        {
+            Titulo();
+            Console.WriteLine("ELIMINAR VENTA");
+        }
+
     }
 }
