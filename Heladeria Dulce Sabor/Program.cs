@@ -52,41 +52,57 @@ namespace Heladeria_Dulce_Sabor
             String nombre;
             int tipoHelado, toppings;
             double precio;
-
+            double totalHelado=0;
+            Console.WriteLine("------------------------------------------");
             Console.Write("DIGITE SU CEDULA: ");
             cc = Console.ReadLine();
+            Console.WriteLine("------------------------------------------");
             Console.Write("DIGITE SU NOMBRE: ");
             nombre = Console.ReadLine();
-            do{
-                Console.WriteLine("DIGITE EL TIPO DE HELADO");
-            Console.Write("1. CONO      2.VASO :");
+            Console.WriteLine("------------------------------------------");
+            do
+            {
+            Console.WriteLine("1.CONO:2500\n2.VASO:3000\n");
+            Console.Write("DIGITE EL TIPO DE HELADO: ");
             tipoHelado = int.Parse(Console.ReadLine());
-            
+            Console.WriteLine("------------------------------------------");
+
                 if (tipoHelado == 1) {
                     Console.WriteLine("CONO");
+                    totalHelado = 2500;
                 } else if (tipoHelado == 2) {
                     Console.WriteLine("VASO");
+                    totalHelado = 3000;
             } else {
                     Console.WriteLine("VALOR INCORRECTO");
                 }
             } while (tipoHelado!=1 && tipoHelado!=2);
-            do{
-            Console.WriteLine("DIGITE SUS TOPPINGS");
-            Console.Write("1.MANI      2.CHISPAS DE CHOCOLATE    3.CHISPAS DE COLORES :");
+            Console.WriteLine("------------------------------------------");
+            do
+            {
+            Console.WriteLine("1.MANI:2000\n2.CHISPAS DE CHOCOLATE:3000\n3.CHISPAS DE COLORES:1500\n");
+            Console.Write("DIGITE SUS TOPPINGS: ");
             toppings = int.Parse(Console.ReadLine());
             
                 if (toppings == 1){
                     Console.WriteLine("MANI");
+                    totalHelado = totalHelado + 2000;
                 }else if (toppings == 2){
                     Console.WriteLine("CHISPAS DE CHOCOLATE");
-                }else if(toppings == 3){
+                    totalHelado = totalHelado + 3000;
+                }
+                else if(toppings == 3){
                     Console.WriteLine("CHISPAS DE COLORES");
-                }else{
+                    totalHelado = totalHelado + 1500;
+                }
+                else{
                     Console.WriteLine("VALOR INCORRECTO");
                 }
             } while (toppings!=1 && toppings!=2 && toppings != 3);
-            Console.Write("DIGITE EL PRECIO: ");
-            precio = double.Parse(Console.ReadLine());
+            Console.WriteLine("------------------------------------------");
+            precio = totalHelado;
+            Console.WriteLine($"EL PRECIO TOTAL DE SU HELADO ES DE: {precio}");
+            Console.WriteLine("------------------------------------------");
             Console.WriteLine("PRECIONE ENTER PARA CONTINUAR");
             Console.ReadKey();
             Console.Clear();
