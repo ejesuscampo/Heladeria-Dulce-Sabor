@@ -3,8 +3,10 @@ using System.IO;
 
 namespace Heladeria_Dulce_Sabor
 {
+
     class Program
     {
+
         static void Main(string[] args)
         {
             //int seleccion;
@@ -46,8 +48,8 @@ namespace Heladeria_Dulce_Sabor
             //    }
 
             //} while (seleccion != 1 && seleccion != 2);
-            //Console.ReadKey();
-            //Console.Clear();
+            Console.ReadKey();
+            Console.Clear();
             Menu();
 
         }
@@ -103,7 +105,7 @@ namespace Heladeria_Dulce_Sabor
                 else
                 {
                     Console.SetCursorPosition(40, 16); Console.WriteLine("MUCHAS GRACIA. ADIOS :)");
-                    Environment.Exit(0);
+                    Environment.Exit(1);
                 }
 
             } while (Op != 5);
@@ -217,7 +219,12 @@ namespace Heladeria_Dulce_Sabor
         static private void Consultar()
         {
             Titulo();
-            Console.WriteLine("VENTAS TOTALES");
+            Console.SetCursorPosition(30, 7); Console.WriteLine("VENTAS TOTALES");
+
+            Leer();
+
+            Console.ReadKey();
+            Console.Clear();
         }
 
         static private void Actualizar()
@@ -235,7 +242,6 @@ namespace Heladeria_Dulce_Sabor
         static private void Guardar(Factura factura)
         {
             string ruta = @"FacturaHelado.txt";
-
             FileStream file = new FileStream(ruta, FileMode.Append);
             StreamWriter writer = new StreamWriter(file);
             writer.WriteLine($"{factura.identificacion};{factura.nombre};{factura.tipoHelado};{factura.toppings};{factura.valor}");
@@ -243,10 +249,25 @@ namespace Heladeria_Dulce_Sabor
             file.Close();
         }
 
-        //public List<Factura>Consultar()
-        //{
+        static private void Leer()
+        {
+            string ruta = @"FacturaHelado.txt";
+            try
+            {
+                string[] lineas = File.ReadAllLines(ruta);
+                foreach (var linea in lineas) {
+                    var val = linea.Split(";");
+                    Console.WriteLine("IDENTIFICACION: " + val[0] + "    NOMBRE: " + val[1] + "     PRESENTACION: " + val[2] + "    TOPPING: " + val[3] + "    VALOR: " + val[3]);
+                }
 
-        //}
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("El archivo no se puede leer");
+            }
+            Console.ReadKey();
+        }
+
     }
 }
 
