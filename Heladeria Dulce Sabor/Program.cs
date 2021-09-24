@@ -222,7 +222,7 @@ namespace Heladeria_Dulce_Sabor
             Console.SetCursorPosition(30, 7); Console.WriteLine("VENTAS TOTALES");
 
             Leer();
-
+            Console.WriteLine("                              PRESIONE ENTER PARA CONTINUAR");
             Console.ReadKey();
             Console.Clear();
         }
@@ -257,7 +257,12 @@ namespace Heladeria_Dulce_Sabor
                 string[] lineas = File.ReadAllLines(ruta);
                 foreach (var linea in lineas) {
                     var val = linea.Split(";");
-                    Console.WriteLine("IDENTIFICACION: " + val[0] + "    NOMBRE: " + val[1] + "     PRESENTACION: " + val[2] + "    TOPPING: " + val[3] + "    VALOR: " + val[3]);
+                    Console.WriteLine("               ------------------------------------------------------");
+                    Console.WriteLine("               IDENTIFICACION: " + val[0]
+                        + "\n               NOMBRE: " + val[1]
+                        + "\n               PRESENTACION: " + val[2]
+                        + "\n               TOPPING: " + val[3]
+                        + "\n               VALOR: " + val[4]);
                 }
 
             }
