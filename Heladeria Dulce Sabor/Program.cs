@@ -4,12 +4,12 @@ namespace Heladeria_Dulce_Sabor
 {
     class Program
     {
-        void Main(string[] args)
+        static void Main(string[] args)
         {
             menu();
         }
 
-        public void menu(){
+        static public void menu(){
             Console.BackgroundColor = ConsoleColor.Yellow;
             Console.ForegroundColor = ConsoleColor.Black;
             int Op=0;
@@ -29,7 +29,7 @@ namespace Heladeria_Dulce_Sabor
                     registrar();
                 } else if(Op == 2){
                     Console.Clear();
-                    //consultar();
+                    Console.WriteLine("AQUI VA LA OPCION DE CONSULTAR");
                 } else if(Op == 3){
                     Console.Clear();
                     Console.WriteLine("AQUI VA LA OPCION DE ACTUALIZAR");
@@ -91,13 +91,5 @@ namespace Heladeria_Dulce_Sabor
             Console.ReadKey();
             Console.Clear();
         }
-
-        /*public void consultar(){
-            Console.WriteLine($"Cedula: {cc}");
-            Console.WriteLine($"Nombre: {nombre}");
-            Console.WriteLine($"Tipo de helado: {tipoHelado}");
-            Console.WriteLine($"Toppings: {toppings}");
-            Console.WriteLine($"Precio: {precio}");
-        }*/
     }
 }
