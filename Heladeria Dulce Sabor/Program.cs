@@ -230,13 +230,16 @@ namespace Heladeria_Dulce_Sabor
         static private void Actualizar()
         {
             Titulo();
-            Console.WriteLine("ACTUALIZAR FACTURA");
-        }
+            Console.SetCursorPosition(30, 7); Console.WriteLine("ACTUALIZAR FACTURA");
+            Console.Clear();
+
+             }
 
         static private void Eliminar()
         {
             Titulo();
             Console.WriteLine("ELIMINAR VENTA");
+            Console.Clear();
         }
 
         static private void Guardar(Factura factura)
