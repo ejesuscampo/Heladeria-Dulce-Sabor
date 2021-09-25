@@ -4,16 +4,18 @@ using System.IO;
 namespace Heladeria_Dulce_Sabor
 {
 
-    class Program
+    public class Program
     {
 
         static void Main(string[] args)
         {
             //int seleccion;
             //String vendedor;
+            
             Console.BackgroundColor = ConsoleColor.Yellow;
             Console.ForegroundColor = ConsoleColor.Black;
 
+            Console.Clear();
             Console.SetCursorPosition(15, 8); Console.Write("                                    BIENVENIDO A HELADERIA  :)                            ");
             Console.SetCursorPosition(15, 9); Console.Write(" ______   __   __  ___      _______  _______    _______  _______  _______  _______  ______");
             Console.SetCursorPosition(15, 10); Console.Write("|      | |  | |  ||   |    |       ||       |  |       ||   _   ||  _    ||       ||    _ |");
@@ -22,38 +24,15 @@ namespace Heladeria_Dulce_Sabor
             Console.SetCursorPosition(15, 13); Console.Write("| |_|   ||       ||   |___ |      _||    ___|  |_____  ||       ||  _   | |  |_|  ||    __  |");
             Console.SetCursorPosition(15, 14); Console.Write("|       ||       ||       ||     |_ |   |___    _____| ||   _   || |_|   ||       ||   |  | |");
             Console.SetCursorPosition(15, 15); Console.Write("| ______||_______||_______||_______||_______|  |_______||__| |__||_______||_______||___|  |_|");
-
-            //do
-            //{
-            //    Console.SetCursorPosition(15, 18); Console.Write("            1. Johana Avila que peina              " + "    2. Daniel Rodriguez    ");
-
-            //    Console.SetCursorPosition(15, 20); Console.Write("                            SELECCIONE EL VENDEDOR: "); ;
-            //    seleccion = int.Parse(Console.ReadLine());
-
-            //    Console.SetCursorPosition(15, 22); Console.Write("------------------------------------------------------");
-
-            //    if (seleccion == 1)
-            //    {
-            //        Console.SetCursorPosition(15, 24); Console.Write("Johana Avila que peina: BIENVENIDA");
-            //        vendedor = "Johana Avila que peina";
-            //    }
-            //    else if (seleccion == 2)
-            //    {
-            //        Console.SetCursorPosition(15, 24); Console.Write("Daniel Rodriguez: BIENVENIDO");
-            //        vendedor = "Daniel Rdodriguez";
-            //    }
-            //    else
-            //    {
-            //        Console.SetCursorPosition(15, 24); Console.Write("VALOR INCORRECTO");
-            //    }
-
-            //} while (seleccion != 1 && seleccion != 2);
+           
+            
             Console.ReadKey();
             Console.Clear();
             Menu();
 
         }
 
+        
         static public void Titulo()
         {
             Console.SetCursorPosition(32, 1); Console.WriteLine("                     HELADERIA                        ");
@@ -165,7 +144,7 @@ namespace Heladeria_Dulce_Sabor
 
             do
             {
-                Console.SetCursorPosition(32, 17); Console.Write("1.VAINILLA      "+"     2. CHOCOLATE" + "         3. ALMENDRA");
+                Console.SetCursorPosition(32, 17); Console.Write("1.VAINILLA      " + "     2. CHOCOLATE" + "         3. ALMENDRA");
                 Console.SetCursorPosition(32, 18); Console.Write("           4. FRESA                 5. MENTA");
 
                 Console.SetCursorPosition(32, 20); Console.Write("DIGITE EL SABOR DEL HELADO : ");
@@ -288,7 +267,7 @@ namespace Heladeria_Dulce_Sabor
                 foreach (var linea in lineas)
                 {
                     var val = linea.Split(";");
-                    Console.WriteLine("                                ------------------------------------------------------");
+                    Console.WriteLine("                        ------------------------------------------------------");
                     Console.WriteLine("                                IDENTIFICACION: " + val[0]
                         + "\n                                NOMBRE: " + val[1]
                         + "\n                                PRESENTACION: " + val[2]
@@ -312,8 +291,9 @@ namespace Heladeria_Dulce_Sabor
         static private void Actualizar()
         {
             Titulo();
-            Console.SetCursorPosition(50, 7); Console.WriteLine("ACTUALIZAR FACTURA");
+            Console.WriteLine("ELIMINAR VENTA");
             Console.Clear();
+
         }
 
         static private void Eliminar()
@@ -322,6 +302,9 @@ namespace Heladeria_Dulce_Sabor
             Console.WriteLine("ELIMINAR VENTA");
             Console.Clear();
         }
+
+
+       
 
         static private void Guardar(Factura factura)
         {
