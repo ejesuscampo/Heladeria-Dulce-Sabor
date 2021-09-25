@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 namespace Heladeria_Dulce_Sabor
 {
@@ -52,5 +50,115 @@ namespace Heladeria_Dulce_Sabor
             Console.ReadKey();
             Console.Clear();
         }
+
+        public void Modificar()
+        {
+            String[] campos = new String[7];
+            bool encontrado = false;
+            byte opcionM;
+            String nuevaCedula, nuevoNombre, nuevoSabor;
+            try
+            {
+                StreamReader lector = File.OpenText(@"FacturaHelado.txt");
+                StreamWriter temporal = File.CreateText(@"tmp.txt");
+                Console.Write("INGRESE EL CODIGO QUE DESEA MODIFICAR: ");
+                int codeFactura = int.Parse(Console.ReadLine());
+                String cadena = lector.ReadLine();
+                while (cadena != null)
+                {
+                    campos = cadena.Split(";");
+
+                    if (campos[0].Trim().Equals(codeFactura))
+                    {
+                        encontrado = true;
+                        Console.WriteLine("------------------------------------------------------");
+                        Console.WriteLine("REGISTRO ENCONTRADO CON LOS SIGUIENTES DATOS");
+                        Console.WriteLine("Codigo:   " + campos[0]);
+                        Console.WriteLine("Cedula:   " + campos[1]);
+                        Console.WriteLine("Nombre:   " + campos[2]);
+                        Console.WriteLine("Present.: " + campos[3]);
+                        Console.WriteLine("Sabor:    " + campos[4]);
+                        Console.WriteLine("Topping:  " + campos[5]);
+                        Console.WriteLine("Valor:    " + campos[6]);
+                        Console.WriteLine("------------------------------------------------------");
+                        Console.Write("Este es el registro?    (S/N)");
+                        String respuesta = Console.ReadLine();
+                        respuesta = respuesta.ToUpper();
+                        if (respuesta.Equals("S"))
+                        {
+                            Console.WriteLine("Modificaciones");
+                            Console.WriteLine("1. Cedula");
+                            Console.WriteLine("2. Nombre");
+                            Console.WriteLine("4. Sabor ");
+                            Console.WriteLine("DIGITE LO QUE DESEA MODIFICAR: ");
+                            opcionM = Convert.ToByte(Console.ReadLine());
+                            switch (opcionM)
+                            {
+                                case 1:
+                                    Console.Write("Digite la nueva cedula: ");
+                                    nuevaCedula = Console.ReadLine();
+                                    nuevaCedula = nuevaCedula.ToUpper();
+                                    temporal.WriteLine(campos[0] + ";" + nuevaCedula + ";" + campos[2] + ";" + campos[3] + ";" + campos[4] + ";" + campos[5] + ";" + campos[6]);
+                                    Console.WriteLine("Registro Modificado");
+                                    break;
+
+                                case 2:
+                                    Console.Write("Digite el nuevo nombre: ");
+                                    nuevoNombre = Console.ReadLine();
+                                    nuevoNombre = nuevoNombre.ToUpper();
+                                    temporal.WriteLine(campos[0] + ";" + campos[1] + ";" + nuevoNombre + ";" + campos[3] + ";" + campos[4] + ";" + campos[5] + ";" + campos[6]);
+                                    Console.WriteLine("Registro Modificado");
+                                    break;
+
+                                case 3:
+                                    Console.Write("Digite el nuevo sabor: ");
+                                    nuevoSabor = Console.ReadLine();
+                                    nuevoSabor = nuevoSabor.ToUpper();
+                                    temporal.WriteLine(campos[0] + ";" + campos[1] + ";" + campos[2] + ";" + campos[3] + ";" + nuevoSabor + ";" + campos[5] + ";" + campos[6]);
+                                    Console.WriteLine("Registro Modificado");
+                                    break;
+
+                                default:
+                                    Console.WriteLine("Opcion incorrecta");
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            temporal.WriteLine(cadena);
+                        }
+                    }
+                    else
+                    {
+                        temporal.WriteLine(cadena);
+                    }
+
+                    cadena = lector.ReadLine();
+                }
+                if (encontrado == false)
+                {
+                    Console.WriteLine("El codigo no se encuentra registrado en el archivo");
+                }
+                lector.Close();
+                temporal.Close();
+
+                File.Delete("FacturaHelado.txt");
+                File.Move("tmp.txt", "FacturaHelado.txt");
+            }
+            catch (FileNotFoundException fn)
+            {
+                Console.WriteLine("Error" + fn.Message);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error" + e.Message);
+            }
+            finally
+            {
+               //lector.Close();
+               //temporal.Close();
+            }
+        }
     }
+
 }

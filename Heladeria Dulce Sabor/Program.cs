@@ -74,7 +74,7 @@ namespace Heladeria_Dulce_Sabor
 
                     case 3:
                         Console.Clear();
-                        Console.WriteLine("AQUI NO HAY NA!");
+                        archivo.Modificar();
                         break;
 
                     case 4:
