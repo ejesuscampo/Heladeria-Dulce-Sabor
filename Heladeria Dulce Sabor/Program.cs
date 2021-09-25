@@ -9,9 +9,7 @@ namespace Heladeria_Dulce_Sabor
 
         static void Main(string[] args)
         {
-            //int seleccion;
-            //String vendedor;
-            
+
             Console.BackgroundColor = ConsoleColor.Yellow;
             Console.ForegroundColor = ConsoleColor.Black;
 
@@ -24,15 +22,15 @@ namespace Heladeria_Dulce_Sabor
             Console.SetCursorPosition(15, 13); Console.Write("| |_|   ||       ||   |___ |      _||    ___|  |_____  ||       ||  _   | |  |_|  ||    __  |");
             Console.SetCursorPosition(15, 14); Console.Write("|       ||       ||       ||     |_ |   |___    _____| ||   _   || |_|   ||       ||   |  | |");
             Console.SetCursorPosition(15, 15); Console.Write("| ______||_______||_______||_______||_______|  |_______||__| |__||_______||_______||___|  |_|");
-           
-            
+
+
             Console.ReadKey();
             Console.Clear();
             Menu();
 
         }
 
-        
+
         static public void Titulo()
         {
             Console.SetCursorPosition(32, 1); Console.WriteLine("                     HELADERIA                        ");
@@ -74,7 +72,7 @@ namespace Heladeria_Dulce_Sabor
                 else if (Op == 3)
                 {
                     Console.Clear();
-                    Actualizar();
+                    Console.WriteLine("AQUI NO HAY NA!");
                 }
                 else if (Op == 4)
                 {
@@ -93,6 +91,9 @@ namespace Heladeria_Dulce_Sabor
 
         static private void Registrar()
         {
+            Random r = new Random();
+            int codigo = r.Next(20000, 50000);
+            int codigoFactura = 0;
             String identificacion, nombre;
             int selecPresentacion, selecToppings, selecSabor;
             double valor = 0, totalHelado = 0;
@@ -100,152 +101,157 @@ namespace Heladeria_Dulce_Sabor
 
             Titulo();
 
-            Console.SetCursorPosition(32, 7); Console.Write("DIGITE SU CEDULA: ");
-            identificacion = Console.ReadLine();
+            Console.SetCursorPosition(32, 7); Console.Write("Ingrese el codigo de la factura: ");
+            codigoFactura = int.Parse(Console.ReadLine());
             Console.SetCursorPosition(32, 8); Console.Write("------------------------------------------------------");
 
-            Console.SetCursorPosition(32, 9); Console.Write("DIGITE SU NOMBRE: ");
-            nombre = Console.ReadLine();
+            Console.SetCursorPosition(32, 9); Console.Write("DIGITE SU CEDULA: ");
+            identificacion = Console.ReadLine();
             Console.SetCursorPosition(32, 10); Console.Write("------------------------------------------------------");
+
+            Console.SetCursorPosition(32, 11); Console.Write("DIGITE SU NOMBRE: ");
+            nombre = Console.ReadLine();
+            Console.SetCursorPosition(32, 12); Console.Write("------------------------------------------------------");
 
             //Seleccionar la presentación del helado
 
             do
             {
-                Console.SetCursorPosition(32, 11); Console.Write("1.CONO:2500                  " + "              2.VASO:3000");
+                Console.SetCursorPosition(32, 13); Console.Write("1.CONO:2500                  " + "              2.VASO:3000");
 
-                Console.SetCursorPosition(32, 13); Console.Write("DIGITE EL TIPO DE HELADO: ");
+                Console.SetCursorPosition(32, 15); Console.Write("DIGITE EL TIPO DE HELADO: ");
                 selecPresentacion = int.Parse(Console.ReadLine());
 
-                Console.SetCursorPosition(32, 14); Console.Write("------------------------------------------------------");
+                Console.SetCursorPosition(32, 16); Console.Write("------------------------------------------------------");
 
                 if (selecPresentacion == 1)
                 {
-                    Console.SetCursorPosition(32, 15); Console.Write("Presentacion: CONO");
+                    Console.SetCursorPosition(32, 17); Console.Write("Presentacion: CONO");
                     presentacionHelado = "CONO: 2500";
                     totalHelado = 2500;
                 }
                 else if (selecPresentacion == 2)
                 {
-                    Console.SetCursorPosition(32, 15); Console.Write("Presentacion: VASO");
+                    Console.SetCursorPosition(32, 17); Console.Write("Presentacion: VASO");
                     presentacionHelado = "VASO: 3000";
                     totalHelado = 3000;
                 }
                 else
                 {
-                    Console.SetCursorPosition(32, 15); Console.Write("VALOR INCORRECTO");
+                    Console.SetCursorPosition(32, 17); Console.Write("VALOR INCORRECTO");
                 }
 
             } while (selecPresentacion != 1 && selecPresentacion != 2);
 
-            Console.SetCursorPosition(32, 16); Console.Write("------------------------------------------------------");
+            Console.SetCursorPosition(32, 18); Console.Write("------------------------------------------------------");
 
             //Selecciona el sabor del helado
 
             do
             {
-                Console.SetCursorPosition(32, 17); Console.Write("1.VAINILLA      " + "     2. CHOCOLATE" + "         3. ALMENDRA");
-                Console.SetCursorPosition(32, 18); Console.Write("           4. FRESA                 5. MENTA");
+                Console.SetCursorPosition(32, 19); Console.Write("1.VAINILLA      " + "     2. CHOCOLATE" + "         3. ALMENDRA");
+                Console.SetCursorPosition(32, 20); Console.Write("           4. FRESA                 5. MENTA");
 
-                Console.SetCursorPosition(32, 20); Console.Write("DIGITE EL SABOR DEL HELADO : ");
+                Console.SetCursorPosition(32, 21); Console.Write("DIGITE EL SABOR DEL HELADO : ");
                 selecSabor = int.Parse(Console.ReadLine());
 
-                Console.SetCursorPosition(32, 21); Console.Write("------------------------------------------------------");
+                Console.SetCursorPosition(32, 22); Console.Write("------------------------------------------------------");
 
                 if (selecSabor == 1)
                 {
-                    Console.SetCursorPosition(32, 22); Console.Write("Sabor: VAINILLA");
+                    Console.SetCursorPosition(32, 23); Console.Write("Sabor: VAINILLA");
                     saborHelado = "Vainilla";
                 }
                 else if (selecSabor == 2)
                 {
-                    Console.SetCursorPosition(32, 22); Console.Write("Sabor: CHOCOLATE");
+                    Console.SetCursorPosition(32, 23); Console.Write("Sabor: CHOCOLATE");
                     saborHelado = "Chocolate";
                 }
                 else if (selecSabor == 3)
                 {
-                    Console.SetCursorPosition(32, 22); Console.Write("Sabor: ALMENDRA");
+                    Console.SetCursorPosition(32, 23); Console.Write("Sabor: ALMENDRA");
                     saborHelado = "Almendra";
                 }
                 else if (selecSabor == 4)
                 {
-                    Console.SetCursorPosition(32, 22); Console.Write("Sabor: FRESA");
+                    Console.SetCursorPosition(32, 23); Console.Write("Sabor: FRESA");
                     saborHelado = "Fresa";
                 }
                 else if (selecSabor == 5)
                 {
-                    Console.SetCursorPosition(32, 22); Console.Write("Sabor: MENTA");
+                    Console.SetCursorPosition(32, 23); Console.Write("Sabor: MENTA");
                     saborHelado = "Menta";
                 }
                 else
                 {
-                    Console.SetCursorPosition(32, 22); Console.Write("VALOR INCORRECTO");
+                    Console.SetCursorPosition(32, 23); Console.Write("VALOR INCORRECTO");
                 }
 
             } while (selecSabor == 0 && selecSabor > 5);
 
-            Console.SetCursorPosition(32, 23); Console.Write("------------------------------------------------------");
+            Console.SetCursorPosition(32, 24); Console.Write("------------------------------------------------------");
 
             //Selecciona el topping que desea añadirle al helado
 
             do
             {
-                Console.SetCursorPosition(32, 24); Console.Write("1.MANI:2000         " + "       2.CHISPAS DE CHOCOLATE:3000");
-                Console.SetCursorPosition(32, 25); Console.Write("         3.CHISPAS DE COLORES: 1500");
+                Console.SetCursorPosition(32, 25); Console.Write("1.MANI:2000         " + "       2.CHISPAS DE CHOCOLATE:3000");
+                Console.SetCursorPosition(32, 26); Console.Write("         3.CHISPAS DE COLORES: 1500");
 
-                Console.SetCursorPosition(32, 27); Console.Write("DIGITE EL TOPPING QUE DESEA AGREGAR: ");
+                Console.SetCursorPosition(32, 28); Console.Write("DIGITE EL TOPPING QUE DESEA AGREGAR: ");
 
                 selecToppings = int.Parse(Console.ReadLine());
 
-                Console.SetCursorPosition(32, 28); Console.Write("------------------------------------------------------");
+                Console.SetCursorPosition(32, 29); Console.Write("------------------------------------------------------");
 
                 if (selecToppings == 1)
                 {
-                    Console.SetCursorPosition(32, 29); Console.Write("Topping: MANI");
+                    Console.SetCursorPosition(32, 30); Console.Write("Topping: MANI");
                     toppingHelado = "MANI: 2000";
                     totalHelado = totalHelado + 2000;
                 }
                 else if (selecToppings == 2)
                 {
-                    Console.SetCursorPosition(32, 29); Console.Write("Topping: CHISPAS DE CHOCOLATE");
+                    Console.SetCursorPosition(32, 30); Console.Write("Topping: CHISPAS DE CHOCOLATE");
                     toppingHelado = "CHISPAS DE CHOCOLATE: 3000";
                     totalHelado = totalHelado + 3000;
                 }
                 else if (selecToppings == 3)
                 {
-                    Console.SetCursorPosition(32, 29); Console.WriteLine("Topping: CHISPAS DE COLORES");
+                    Console.SetCursorPosition(32, 30); Console.WriteLine("Topping: CHISPAS DE COLORES");
                     toppingHelado = "CHISPAS DE COLORES: 1500";
                     totalHelado = totalHelado + 1500;
                 }
                 else
                 {
-                    Console.SetCursorPosition(32, 29); Console.WriteLine("VALOR INCORRECTO");
+                    Console.SetCursorPosition(32, 30); Console.WriteLine("VALOR INCORRECTO");
                 }
 
             } while (selecToppings != 1 && selecToppings != 2 && selecToppings != 3);
 
             valor = totalHelado;
 
-            Console.SetCursorPosition(32, 30); Console.Write("------------------------------------------------------");
+            Console.SetCursorPosition(32, 31); Console.Write("------------------------------------------------------");
 
             //Llama al objeto factura
 
-            Factura factura = new Factura(identificacion, nombre, presentacionHelado, saborHelado, toppingHelado, valor);
+            Factura factura = new Factura(codigoFactura, identificacion, nombre, presentacionHelado, saborHelado, toppingHelado, valor);
 
             //Muestra la factura de lo comprado
 
             Console.Clear();
             Titulo();
             Console.SetCursorPosition(32, 8); Console.Write("-----------------    F A C T U R A    ----------------");
-            Console.SetCursorPosition(32, 9); Console.Write("Cedula: " + factura.identificacion);
-            Console.SetCursorPosition(32, 10); Console.Write("Nombre: " + factura.nombre);
-            Console.SetCursorPosition(32, 11); Console.Write("Tipo de helado: " + factura.tipoHelado);
-            Console.SetCursorPosition(32, 12); Console.Write("Tipo de helado: " + factura.saborHelado);
-            Console.SetCursorPosition(32, 13); Console.Write("Toppings: " + factura.toppingHelado);
+            Console.SetCursorPosition(32, 9); Console.Write("Cedula: " + factura.codigoFactura);
+            Console.SetCursorPosition(32, 10); Console.Write("Cedula: " + factura.identificacion);
+            Console.SetCursorPosition(32, 11); Console.Write("Nombre: " + factura.nombre);
+            Console.SetCursorPosition(32, 12); Console.Write("Tipo de helado: " + factura.tipoHelado);
+            Console.SetCursorPosition(32, 13); Console.Write("Tipo de helado: " + factura.saborHelado);
+            Console.SetCursorPosition(32, 14); Console.Write("Toppings: " + factura.toppingHelado);
 
-            Console.SetCursorPosition(32, 14); Console.Write($"EL PRECIO TOTAL DE SU HELADO ES DE: " + factura.valor);
+            Console.SetCursorPosition(32, 16); Console.Write($"EL PRECIO TOTAL DE SU HELADO ES DE: " + factura.valor);
 
-            Console.SetCursorPosition(32, 16); Console.Write("Presione ENTER para continuar");
+            Console.SetCursorPosition(32, 18); Console.Write("Presione ENTER para continuar");
 
             Guardar(factura);
 
@@ -267,13 +273,14 @@ namespace Heladeria_Dulce_Sabor
                 foreach (var linea in lineas)
                 {
                     var val = linea.Split(";");
-                    Console.WriteLine("                        ------------------------------------------------------");
-                    Console.WriteLine("                                IDENTIFICACION: " + val[0]
-                        + "\n                                NOMBRE: " + val[1]
-                        + "\n                                PRESENTACION: " + val[2]
-                        + "\n                                SABOR: " + val[3]
-                        + "\n                                TOPPING: " + val[4]
-                        + "\n                                VALOR: " + val[5]);
+                    Console.WriteLine("                                ------------------------------------------------------");
+                    Console.WriteLine("                                CODIGO:" + val[0]
+                        + "\n                                IDENTIFICACION: " + val[1]
+                        + "\n                                NOMBRE: " + val[2]
+                        + "\n                                PRESENTACION: " + val[3]
+                        + "\n                                SABOR: " + val[4]
+                        + "\n                                TOPPING: " + val[5]
+                        + "\n                                VALOR: " + val[6]);
                 }
 
             }
@@ -283,35 +290,63 @@ namespace Heladeria_Dulce_Sabor
             }
 
             Console.WriteLine("");
-            Console.WriteLine("                              PRESIONE ENTER PARA CONTINUAR");
+            Console.WriteLine("                                PRESIONE ENTER PARA CONTINUAR");
             Console.ReadKey();
             Console.Clear();
         }
 
-        static private void Actualizar()
+        static public void Eliminar()
         {
             Titulo();
-            Console.WriteLine("ELIMINAR VENTA");
-            Console.Clear();
+            String[] campos = new String[7];
+            bool encontrado = false;
 
+            StreamReader lector = File.OpenText(@"FacturaHelado.txt");
+            StreamWriter escritor = File.CreateText(@"FacturaHelados.txt");
+            Console.SetCursorPosition(55, 7); Console.Write("ELIMINAR REGISTRO ");
+            Console.SetCursorPosition(32, 8); Console.Write("Ingrese el codigo de la factura que desea eliminar: ");
+            int codeFactura = int.Parse(Console.ReadLine());
+            String cadena = lector.ReadLine();
+            while (cadena != null)
+            {
+                campos = cadena.Split(";");
+
+                if (campos[0].Trim().Equals(codeFactura))
+                {
+                    encontrado = true;
+                }
+                else
+                {
+                    escritor.WriteLine(cadena);
+                }
+                //cadena = lector.ReadLine();
+            }
+
+            if (encontrado == false)
+            {
+                Console.WriteLine("Este codigo no se encuentra registrado");
+            }
+            else
+            {
+                Console.WriteLine("Registro Eliminado");
+            }
+            lector.Close();
+            escritor.Close();
+
+            File.Delete("FacturaHelado.txt");
+            File.Move("FacturaHelados.txt", "FacturaHelado.txt");
+            Console.Clear();
         }
 
-        static private void Eliminar()
-        {
-            Titulo();
-            Console.WriteLine("ELIMINAR VENTA");
-            Console.Clear();
-        }
 
 
-       
 
         static private void Guardar(Factura factura)
         {
             string ruta = @"FacturaHelado.txt";
             FileStream file = new FileStream(ruta, FileMode.Append);
             StreamWriter writer = new StreamWriter(file);
-            writer.WriteLine($"{factura.identificacion};{factura.nombre};{factura.tipoHelado};{factura.saborHelado};{factura.toppingHelado};{factura.valor}");
+            writer.WriteLine($"{factura.codigoFactura};{factura.identificacion};{factura.nombre};{factura.tipoHelado};{factura.saborHelado};{factura.toppingHelado};{factura.valor}");
             writer.Close();
             file.Close();
         }
