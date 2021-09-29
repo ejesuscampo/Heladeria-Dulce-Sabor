@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Entidad;
+using Logica;
+using System;
 using System.IO;
 
 namespace Heladeria_Dulce_Sabor
@@ -6,6 +8,8 @@ namespace Heladeria_Dulce_Sabor
 
     public class Program
     {
+        private static readonly FacturaService facturaService = new FacturaService();
+
         static void Main(string[] args)
         {
 
@@ -31,6 +35,7 @@ namespace Heladeria_Dulce_Sabor
 
         static public void Titulo()
         {
+            Console.Clear();
             Console.SetCursorPosition(32, 1); Console.WriteLine("                     HELADERIA                        ");
             Console.SetCursorPosition(32, 2); Console.WriteLine(" ____        _              _____       _             ");
             Console.SetCursorPosition(32, 3); Console.WriteLine("|    |  _ _ | | ___  ___   |   __| ___ | |_  ___  ___ ");
@@ -62,23 +67,19 @@ namespace Heladeria_Dulce_Sabor
                 switch (opcion)
                 {
                     case 1:
-                        Console.Clear();
-                        Registrar();
+                        Guardar();
                         break;
 
                     case 2:
-                        Console.Clear();
-                        Titulo();
-                        archivo.Consultar();
+                        Consultar();
+                        Console.ReadKey();
                         break;
 
                     case 3:
-                        Console.Clear();
-                        archivo.Modificar();
+                        Console.WriteLine("Aqui no hay na!");
                         break;
 
                     case 4:
-                        Console.Clear();
                         Eliminar();
                         break;
 
@@ -95,9 +96,19 @@ namespace Heladeria_Dulce_Sabor
 
         }
 
-        static private void Registrar()
+        private static void Guardar()
         {
-            Random r = new Random();
+            Console.Clear();
+            Titulo();
+            var factura = Registrar();
+            string mensaje = facturaService.Guardar(factura);
+            Console.WriteLine(mensaje);
+        }
+
+        static private Factura Registrar()
+        {
+            Factura factura
+;           Random r = new Random();
             int codigoFactura = r.Next(200000, 500000);
             String identificacion, nombre;
             byte selecPresentacion, selecToppings, selecSabor;
@@ -244,74 +255,104 @@ namespace Heladeria_Dulce_Sabor
 
             //Llama al objeto factura
 
-            Factura factura = new Factura(codigoFactura, identificacion, nombre, presentacionHelado, saborHelado, toppingHelado, valor);
+            factura = new Factura(codigoFactura, identificacion, nombre, presentacionHelado, saborHelado, toppingHelado, valor);
 
             //Muestra la factura de lo comprado
 
             Console.Clear();
             Titulo();
             Console.SetCursorPosition(32, 8); Console.Write("-----------------    F A C T U R A    ----------------");
-            Console.SetCursorPosition(32, 9); Console.Write("Codigo:   " + factura.codigoFactura);
-            Console.SetCursorPosition(32, 10); Console.Write("Cedula:   " + factura.identificacion);
-            Console.SetCursorPosition(32, 11); Console.Write("Nombre:   " + factura.nombre);
-            Console.SetCursorPosition(32, 12); Console.Write("Present.: " + factura.tipoHelado);
-            Console.SetCursorPosition(32, 13); Console.Write("Sabor:    " + factura.saborHelado);
-            Console.SetCursorPosition(32, 14); Console.Write("Toppings: " + factura.toppingHelado);
+            Console.SetCursorPosition(32, 9); Console.Write("Codigo:   " + factura.CodigoFactura);
+            Console.SetCursorPosition(32, 10); Console.Write("Cedula:   " + factura.Identificacion);
+            Console.SetCursorPosition(32, 11); Console.Write("Nombre:   " + factura.Nombre);
+            Console.SetCursorPosition(32, 12); Console.Write("Present.: " + factura.TipoHelado);
+            Console.SetCursorPosition(32, 13); Console.Write("Sabor:    " + factura.SaborHelado);
+            Console.SetCursorPosition(32, 14); Console.Write("Toppings: " + factura.ToppingHelado);
 
-            Console.SetCursorPosition(32, 16); Console.Write($"EL TOTAL A PAGAR ES DE: $" + factura.valor);
+            Console.SetCursorPosition(32, 16); Console.Write($"EL TOTAL A PAGAR ES DE: $" + factura.Valor);
 
-            Console.SetCursorPosition(32, 18); Console.Write("Presione ENTER para continuar");
-
-            Archivo archivo = new Archivo();
-            archivo.Guardar(factura);
-
+            Console.SetCursorPosition(32, 18); Console.Write("Registro guardado... Presione ENTER para continuar");
             Console.ReadKey();
-            Console.Clear();
+
+            return factura;
+ 
         }
 
-        static public void Eliminar()
+        private static void Consultar()
         {
+            Console.Clear();
             Titulo();
-            String[] campos = new String[7];
-            bool encontrado = false;
-
-            StreamReader lector = File.OpenText(@"FacturaHelado.txt");
-            StreamWriter escritor = File.CreateText(@"FacturaHelados.txt");
-            Console.SetCursorPosition(55, 7); Console.Write("ELIMINAR REGISTRO ");
-            Console.SetCursorPosition(32, 8); Console.Write("------------------------------------------------------");
-            Console.SetCursorPosition(32, 9); Console.Write("DIGITE CODIGO PARA ELIMINAR : ");
-            int codeFactura = int.Parse(Console.ReadLine());
-            String cadena = lector.ReadLine();
-            while (cadena != null)
+            Console.SetCursorPosition(55, 7); Console.WriteLine("VENTAS TOTALES");
+            Console.SetCursorPosition(32, 8); Console.WriteLine("------------------------------------------------------");
+            var respuesta = facturaService.Consultar();
+            if (respuesta.Error)
             {
-                campos = cadena.Split(";");
-
-                if (campos[0].Trim().Equals(codeFactura))
-                {
-                    encontrado = true;
-                }
-                else
-                {
-                    escritor.WriteLine(cadena);
-                }
-                //cadena = lector.ReadLine();
-            }
-
-            if (encontrado == false)
-            {
-                Console.WriteLine("Este codigo no se encuentra registrado");
+                Console.WriteLine(respuesta.Mensaje);
             }
             else
             {
-                Console.WriteLine("Registro Eliminado");
+                foreach (var item in respuesta.Personas)
+                {
+                    Console.WriteLine(item.ToString());
+                    Console.WriteLine("                                ------------------------------------------------------");
+                }
             }
-            lector.Close();
-            escritor.Close();
-
-            File.Delete("FacturaHelado.txt");
-            File.Move("FacturaHelados.txt", "FacturaHelado.txt");
-            Console.Clear();
         }
 
+
+        static public void Eliminar()
+        {
+
+            Titulo();
+
+            Console.SetCursorPosition(45, 7); Console.Write("ELIMINAR REGISTRO FACTURA");
+            Console.SetCursorPosition(32, 8); Console.Write("------------------------------------------------------");
+            Console.SetCursorPosition(32, 9); Console.Write("DIGITE CODIGO PARA ELIMINAR: ");
+            int codeFactura = int.Parse(Console.ReadLine());
+            string mensaje = facturaService.Eliminar(codeFactura);
+            Console.WriteLine(mensaje);
+            Console.ReadKey();
+
+            //String[] campos = new String[7];
+            //bool encontrado = false;
+
+            //StreamReader lector = File.OpenText(@"FacturaHelado.txt");
+            //StreamWriter escritor = File.CreateText(@"FacturaHelados.txt");
+            //Console.SetCursorPosition(55, 7); Console.Write("ELIMINAR REGISTRO ");
+            //Console.SetCursorPosition(32, 8); Console.Write("------------------------------------------------------");
+            //Console.SetCursorPosition(32, 9); Console.Write("DIGITE CODIGO PARA ELIMINAR : ");
+            //int codeFactura = int.Parse(Console.ReadLine());
+            //String cadena = lector.ReadLine();
+
+            //while (cadena != null)
+            //{
+            //    campos = cadena.Split(";");
+
+            //    if (campos[0].Trim().Equals(codeFactura))
+            //    {
+            //        encontrado = true;
+            //    }
+            //    else
+            //    {
+            //        escritor.WriteLine(cadena);
+            //    }
+            //    //cadena = lector.ReadLine();
+            //}
+
+            //if (encontrado == false)
+            //{
+            //    Console.WriteLine("Este codigo no se encuentra registrado");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("Registro Eliminado");
+            //}
+            //lector.Close();
+            //escritor.Close();
+
+            //File.Delete("FacturaHelado.txt");
+            //File.Move("FacturaHelados.txt", "FacturaHelado.txt");
+            //Console.Clear();
+        }
     }
 }
