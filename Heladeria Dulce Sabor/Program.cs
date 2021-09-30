@@ -46,7 +46,6 @@ namespace Heladeria_Dulce_Sabor
 
         static public void Menu()
         {
-            Archivo archivo = new Archivo();
             byte opcion = 0;
 
             do
@@ -313,46 +312,6 @@ namespace Heladeria_Dulce_Sabor
             Console.WriteLine(mensaje);
             Console.ReadKey();
 
-            //String[] campos = new String[7];
-            //bool encontrado = false;
-
-            //StreamReader lector = File.OpenText(@"FacturaHelado.txt");
-            //StreamWriter escritor = File.CreateText(@"FacturaHelados.txt");
-            //Console.SetCursorPosition(55, 7); Console.Write("ELIMINAR REGISTRO ");
-            //Console.SetCursorPosition(32, 8); Console.Write("------------------------------------------------------");
-            //Console.SetCursorPosition(32, 9); Console.Write("DIGITE CODIGO PARA ELIMINAR : ");
-            //int codeFactura = int.Parse(Console.ReadLine());
-            //String cadena = lector.ReadLine();
-
-            //while (cadena != null)
-            //{
-            //    campos = cadena.Split(";");
-
-            //    if (campos[0].Trim().Equals(codeFactura))
-            //    {
-            //        encontrado = true;
-            //    }
-            //    else
-            //    {
-            //        escritor.WriteLine(cadena);
-            //    }
-            //    //cadena = lector.ReadLine();
-            //}
-
-            //if (encontrado == false)
-            //{
-            //    Console.WriteLine("Este codigo no se encuentra registrado");
-            //}
-            //else
-            //{
-            //    Console.WriteLine("Registro Eliminado");
-            //}
-            //lector.Close();
-            //escritor.Close();
-
-            //File.Delete("FacturaHelado.txt");
-            //File.Move("FacturaHelados.txt", "FacturaHelado.txt");
-            //Console.Clear();
         }
     }
 }
